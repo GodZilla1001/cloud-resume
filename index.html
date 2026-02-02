@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Angel Lozada Servin - Cloud Resume</title>
+</head>
+
+<body>
+    <nav class="top-nav">
+        <button onclick="showSection('projects-section')">View Projects</button>
+        <button onclick="showSection('resume-section')">View Resume</button>
+    </nav>
+
+    <div id="resume-section" style="display:none;">
+        <h1>Angel Lozada Servin</h1>
+        <p><strong>IT-focused Fulfillment Associate</strong> IT-focused Fulfillment Associate with 4+ years of
+            experience in
+            high-volume technical problem-solving and inventory logistics.
+            Excel-certified with hands-on skills in SQL, cloud technologies (AWS/Azure).
+            Actively transitioning into IT roles where analytical thinking, problem-solving, and technical skills drive
+            business impact.</p>
+        <div class="container">
+            <div class="left-column">
+
+                <h2>WORK EXPERIENCE</h2>
+                <p><strong>Amazon, 800 N 75th Ave, PHX7, Phoenix, AZ, 85043 - <i>Fulfillment Associate & Technical
+                            Problem Solver</i></strong><br>Sep 2021 – PRESENT</p>
+                <ul class="responsibilities">
+                    <li><strong>System Troubleshooting:</strong> Utilize Warehouse Management Systems (WMS) and handheld
+                        scanning hardware to identify and resolve inventory discrepancies, issues, and system-level
+                        bottlenecks.</li>
+                    <li><strong>Data Integrity:</strong> Maintain 100% inventory accuracy by performing root cause
+                        analysis on mis-shipped items.</li>
+                    <li><strong>Efficiency & Performance:</strong> Resolve high-priority technical and logical issues
+                        within 5-minute windows to ensure workflow continuity and hit delivery targets.</li>
+                </ul>
+
+                <h2>CERTIFICATIONS</h2>
+                <div class="badge-container">
+                    <img src="Excel-badge.png" alt="Microsoft Office Specialist - Excel Associate Badge" class="badge">
+                    <ul class="badge-text">
+                        <li><strong>Microsoft Office Specialist — Excel Associate (Microsoft 365 Apps)</strong></li>
+                        <p>Issued on November 25, 2025.</p>
+                    </ul>
+                </div>
+
+                <h2>TRAINING</h2>
+                <div class="badge-container">
+                    <img src="AWS-badge.png" alt="AWS Academy Graduate - Cloud Foundations Badge" class="badge">
+
+                    <ul class="badge-text">
+                        <li><strong>AWS Academy Graduate - Cloud Foundations -</strong> <i>Training Badge</i></li>
+                        <p>Issued on December 13, 2025.</p>
+                    </ul>
+                </div>
+            </div>
+            <div class="right-column">
+                <h2>CONTACT</h2>
+                <a href="mailto:anglozdaan@gmail.com">anglozdaan@gmail.com</a>
+                <br>
+                (480) 561-7963
+                <br>
+                Phoenix, AZ
+                <br>
+                <a href="https://www.linkedin.com/in/angel-lozada-646a5037b">LinkedIn Profile</a>
+
+                <h2>TECHNICAL SKILLS</h2>
+                <ul class="skills">
+                    <li><strong>Programming:</strong> SQL, Java, JavaScript, Python, HTML, CSS, PHP</li>
+                    <li><strong>Tools:</strong> VS Code, MySQL Workbench, Microsoft Excel (pivot tables, charts,
+                        array formulas, VLOOKUP/XLOOKUP, data migration)</li>
+                    <li><strong>Cloud:</strong> AWS (Cloud Foundations, hands-on-labs), Azure (Fundamentals)</li>
+                    <li><strong>Data:</strong> Data entry, migration, analysis, cleansing, visualization (Excel,
+                        Quicksight)</li>
+                </ul>
+                <h2>EDUCATION</h2>
+                <p><strong>Estrella Mountain Community College</strong> - <i>AAS Information Technology</i></p>
+                <p>May 2026 (Expected)</p>
+                <p>Instruction in the principles of computer hardware components and business software, programming,
+                    databases, networking, customer service, web development, information systems and project
+                    management.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="projects-section">
+        <h1>Technical Projects</h1>
+        <div class="project-grid">
+            <p>Project details coming soon...</p>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.getElementById('projects-section').style.display = 'none';
+            document.getElementById('resume-section').style.display = 'none';
+            document.getElementById(sectionId).style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
