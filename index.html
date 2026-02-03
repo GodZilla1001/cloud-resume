@@ -27,7 +27,7 @@
 
                 <h2>WORK EXPERIENCE</h2>
                 <p><strong>Amazon, 800 N 75th Ave, PHX7, Phoenix, AZ, 85043 - <i>Fulfillment Associate & Technical
-                            Problem Solver</i></strong><br>Sep 2021 – PRESENT</p>
+                            Problem Solver</i></strong>Sep 2021 – PRESENT</p>
                 <ul class="responsibilities">
                     <li><strong>System Troubleshooting:</strong> Utilize Warehouse Management Systems (WMS) and handheld
                         scanning hardware to identify and resolve inventory discrepancies, issues, and system-level
@@ -60,21 +60,22 @@
             <div class="right-column">
                 <h2>CONTACT</h2>
                 <a href="mailto:anglozdaan@gmail.com">anglozdaan@gmail.com</a>
-                <br>
+                
                 (480) 561-7963
-                <br>
+                
                 Phoenix, AZ
-                <br>
+                
                 <a href="https://www.linkedin.com/in/angel-lozada-646a5037b">LinkedIn Profile</a>
 
                 <h2>TECHNICAL SKILLS</h2>
                 <ul class="skills">
                     <li><strong>Programming:</strong> SQL, Java, JavaScript, Python, HTML, CSS, PHP</li>
                     <li><strong>Tools:</strong> VS Code, MySQL Workbench, Microsoft Excel (pivot tables, charts,
-                        array formulas, VLOOKUP/XLOOKUP, data migration)</li>
-                    <li><strong>Cloud:</strong> AWS (Cloud Foundations, hands-on-labs), Azure (Fundamentals)</li>
-                    <li><strong>Data:</strong> Data entry, migration, analysis, cleansing, visualization (Excel,
-                        Quicksight)</li>
+                        array formulas, VLOOKUP/XLOOKUP, data migration), Git, GitHub, CI/CD pipelines, Bash/Command
+                        Line</li>
+                    <li><strong>Cloud services:</strong> AWS (IAM, S3, QuickSight), Azure (Power BI)</li>
+                    <li><strong>Data:</strong> Data entry, migration, analysis, cleansing, visualization, durability
+                        (versioning)</li>
                 </ul>
                 <h2>EDUCATION</h2>
                 <p><strong>Estrella Mountain Community College</strong> - <i>AAS Information Technology</i></p>
@@ -88,8 +89,70 @@
 
     <div id="projects-section">
         <h1>Technical Projects</h1>
-        <div class="project-grid">
-            <p>Project details coming soon...</p>
+        <div class="project-grid" onclick="toggleProject('s3-details')">
+            <div class="project-header">
+                <img src="HTML_logo.png" alt="HTML Logo" class="project-logo">
+                <img src="css_logo.png" alt="CSS Logo" class="project-logo">
+                <img src="Github_logo.png" alt="GitHub Logo" class="project-logo">
+                <img src="AWS_logo.png" alt="AWS Logo" class="project-logo">
+                <span class="project-title">Static Website Hosting</span>
+                <span class="expand-icon">+</span>
+            </div>
+
+            <div id="s3-details" class="project-details" style="display:none;">
+                <hr>
+                <p><strong>Purpose:</strong> Showcase an understanding and proficiency in web hosting languages (HTML,
+                    CSS, JavaScript) and deployment automation. The goal
+                    wasn't just to build a static website but to automate its deployment process.</p>
+                <ul class="details-list">
+                    <li><strong>AWS S3:</strong> Configured a bucket for static hosting and set public read policies.
+                    </li>
+                    <img src="static1.png" alt="Static Website Hosting AWS S3 Bucket" class="resource-image">
+                    <img src="static2.png" alt="Blocked Access to Static Website" class="resource-image">
+                    <li><strong>Configured JSON Bucket Policy:</strong> Set up a bucket policy to allow public read
+                        access to static website content. This is necessary to make the website publicly accessible.
+                    </li>
+                    <img src="static3.png" alt="JSON Bucket Policy" class="resource-image">
+                    <li><strong>GitHub Actions:</strong> Developed a YAML workflow to automate deployments to an AWS S3
+                        bucket on every git
+                        push to the main branch.</li>
+                    <img src="S3_JSON.png" alt="GitHub Actions Workflow for S3 Deployment" class="resource-image">
+                    <p><strong>Workflow Trigger & Setup:</strong> The workflow is named, "Deploy Resume to S3" and when
+                        a push event occurs onto the main branch, it runs on an Ubuntu-latest runner.
+                        This runner provides a fresh Linux environment in order to execute the deployment process.</p>
+                    
+                    <p><strong>Code Checkout:</strong> The first step in the workflow uses the "actions/checkout@v3"
+                        action to clone the latest repository code into the runner's workspace.
+                        This step ensures that the runner has access to the most up-to-date version of the code and
+                        project files are available for proceeding deployment steps.</p>
+                    
+                    <p><strong>AWS Authentication:</strong> The second step in the workflow uses the
+                        "aws-actions/configure-aws-credentials@v2" action to securely authenticate with AWS using
+                        secrets stored in my GitHub repository (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY).
+                        The region is set to us-west-1, the region in which my AWS resources are configured and API
+                        called are redirected to.</p>
+                    <img src="Secrets.png" alt="GitHub Secrets for AWS Credentials" class="resource-image">
+                    <img src="region.png" alt="AWS S3 Bucket Overview" class="resource-image">
+
+                    <p><strong>S3 Deployment:</strong> The final step of the workflow uses the AWS CLI's "aws s3 sync"
+                        command to synchronize the local project files with the S3 bucket named
+                        "angel-cloud-resume-2026".
+                        The "--delete" flag is included to remove any files in the S3 bucket that are no longer present
+                        in the local repository, ensuring removed repository files are also removed from the S3 bucket.
+                        This achieves accurate reflection of the current state of the project.
+                        The "--exclude" flag is used to exclude any hidden files (starting with a dot, .github* and
+                        .git*) from being uploaded to S3 bucket.</p>
+                    
+                    <p><strong>Security Considerations:</strong> We must never store sensitive credentials in
+                        version-controlled repositories or expose them in public code.
+                        Instead, these keys are stored in GitHub's encrypted secrets manager which also happens to be
+                        where this workflow retrieves them.</p>
+                    
+                    <li><strong>Git CLI:</strong> Managed version control and resolved case-sensitivity deployment
+                        hurdles.</li>
+                    <li><strong>AWS IAM:</strong> Created IAM roles and policies to secure access to AWS resources.</li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -98,6 +161,19 @@
             document.getElementById('projects-section').style.display = 'none';
             document.getElementById('resume-section').style.display = 'none';
             document.getElementById(sectionId).style.display = 'block';
+        }
+
+        function toggleProject(detailId) {
+            const details = document.getElementById(detailId);
+            const icon = details.parentElement.querySelector('.expand-icon');
+
+            if (details.style.display === "none") {
+                details.style.display = "block";
+                icon.innerText = "−";
+            } else {
+                details.style.display = "none";
+                icon.innerText = "+";
+            }
         }
     </script>
 </body>
