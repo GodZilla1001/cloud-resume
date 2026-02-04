@@ -104,9 +104,11 @@
                 <hr>
                 <p><strong>Purpose:</strong> Showcase an understanding and proficiency in web hosting languages (HTML,
                     CSS, JavaScript) and deployment automation. The goal
-                    wasn't just to build a static website but to automate its deployment process.</p>
+                    wasn't just to build a static website but to automate its deployment process minimizing human error.
+                </p>
                 <ul class="details-list">
-                    <li><strong>AWS S3:</strong> Configured a bucket for static hosting and set public read policies.
+                    <li><strong>AWS S3:</strong> Configured an Amazon S3 bucket for static hosting. Altered the default
+                        private bucket settings for public read access using a custom JSON bucket policy.
                     </li>
                     <img src="Images/static1.png" alt="Static Website Hosting AWS S3 Bucket" class="resource-image">
                     <img src="Images/static2.png" alt="Blocked Access to Static Website" class="resource-image">
@@ -152,10 +154,12 @@
 
                     <li><strong>Git CLI:</strong> Implemented Git to manage the project lifecycle, utilizing a
                         local-to-remote workflow to track changes in HTML, CSS, and associated files.</li>
-                        <p><i><strong>Repository Organization:</strong></i></p>
-                        <img src="Images/Git.png" alt="GitHub Repository Structure" class="resource-image">
-                        
-                    <li><strong>AWS IAM:</strong> Created IAM roles and policies to secure access to AWS resources.</li>
+                    <p class="descriptions">Repository Organization: Structure of the GitHub repository is organized in a way that allows for easy navigation and management of project files.</p>
+                    <img src="Images/Git.png" alt="GitHub Repository Structure" class="resource-image">
+
+                    <li><strong>AWS IAM:</strong> Created IAM user "github-resume-deployer" with appropriate permissions
+                        following the Principle of Least Privilege. The user is restricted from having console access
+                        and is allowed only programmatic-only permissions for S3.</li>
                     <img src="Images/IAM1.png" alt="IAM User Policies" class="resource-image">
                     <p>Above is the brief summary of user "github-resume-deployer". The summary lists the Amazon
                         Resource Name (ARN) of the IAM user. It also displays console access as "Disabled", as this user
@@ -170,7 +174,9 @@
                     <p>The following image displays an expanded view of the policy permissions. Here, the user has full
                         access to S3 and S3 Object Lambda operations.</p>
                     <img src="Images/IAM_perm_exp.png" alt="IAM User Permissions Expanded" class="resource-image">
-                    <p><i>JSON code of IAM Policy:</i></p>
+                    <p class="descriptions" alt="IAM User JSON Policy Description">The JSON policy document defines the permissions
+                        granted to the IAM user "github-resume-deployer". It allows all actions ("s3:*") on all S3
+                        resources ("arn:aws:s3:::*"), effectively granting full access to S3 services.</p>
                     <img src="Images/IAM_JSON.png" alt="IAM User JSON Policy" class="resource-image">
                 </ul>
             </div>

@@ -213,10 +213,6 @@ a:hover {
     animation: fadeIn 0.3s ease-in-out;
 }
 
-.project-details p {
-    margin-top: 10px;
-}
-
 .resource-image {
     max-width: 100%;
     height: auto;
@@ -234,8 +230,26 @@ a:hover {
     padding-left: 20px;
 }
 
-.details-list p, .details-list li {
+.details-list p,
+.details-list li {
     padding: 10px 0;
+}
+
+.details-list p {
+    border-left: #FF9900 2px solid;
+    padding-left: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.descriptions {
+    font-size: smaller;
+    margin-top: 10px;
+    font-weight: bold;
+    font-style: italic;
+    border-style: solid;
+    border-color: #FF9900;
 }
 
 @media (max-width: 768px) {
