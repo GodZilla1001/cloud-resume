@@ -40,7 +40,8 @@
 
                 <h2>CERTIFICATIONS</h2>
                 <div class="badge-container">
-                    <img src="Images/Excel-badge.png" alt="Microsoft Office Specialist - Excel Associate Badge" class="badge">
+                    <img src="Images/Excel-badge.png" alt="Microsoft Office Specialist - Excel Associate Badge"
+                        class="badge">
                     <ul class="badge-text">
                         <li><strong>Microsoft Office Specialist — Excel Associate (Microsoft 365 Apps)</strong></li>
                         <p>Issued on November 25, 2025.</p>
@@ -116,7 +117,8 @@
                     <li><strong>GitHub Actions:</strong> Developed a YAML workflow to automate deployments to an AWS S3
                         bucket on every git
                         push to the main branch.</li>
-                    <img src="Images/S3_JSON.png" alt="GitHub Actions Workflow for S3 Deployment" class="resource-image">
+                    <img src="Images/S3_JSON.png" alt="GitHub Actions Workflow for S3 Deployment"
+                        class="resource-image">
                     <p><strong>Workflow Trigger & Setup:</strong> The workflow is named, "Deploy Resume to S3" and when
                         a push event occurs onto the main branch, it runs on an Ubuntu-latest runner.
                         This runner provides a fresh Linux environment in order to execute the deployment process.</p>
@@ -148,8 +150,11 @@
                         Instead, these keys are stored in GitHub's encrypted secrets manager which also happens to be
                         where this workflow retrieves them.</p>
 
-                    <li><strong>Git CLI:</strong> Managed version control and resolved case-sensitivity deployment
-                        hurdles.</li>
+                    <li><strong>Git CLI:</strong> Implemented Git to manage the project lifecycle, utilizing a
+                        local-to-remote workflow to track changes in HTML, CSS, and associated files.</li>
+                        <p><i><strong>Repository Organization:</strong></i></p>
+                        <img src="Images/Git.png" alt="GitHub Repository Structure" class="resource-image">
+                        
                     <li><strong>AWS IAM:</strong> Created IAM roles and policies to secure access to AWS resources.</li>
                     <img src="Images/IAM1.png" alt="IAM User Policies" class="resource-image">
                     <p>Above is the brief summary of user "github-resume-deployer". The summary lists the Amazon
@@ -157,11 +162,13 @@
                         is only intended for programmatic access via GitHub Actions. This user is also assigned an
                         access key.</p>
 
-                    <p>Below, we can see the policy name, "AmazonS3FullAccess". These policies are explicitly attached to this user, hence the attached via "Directly" section. Note
+                    <p>Below, we can see the policy name, "AmazonS3FullAccess". These policies are explicitly attached
+                        to this user, hence the attached via "Directly" section. Note
                         this user has AmazonS3FullAccess permissions.</p>
                     <img src="Images/IAM_perm.png" alt="IAM User Permissions" class="resource-image">
 
-                    <p>The following image displays an expanded view of the policy permissions. Here, the user has full access to S3 and S3 Object Lambda operations.</p>
+                    <p>The following image displays an expanded view of the policy permissions. Here, the user has full
+                        access to S3 and S3 Object Lambda operations.</p>
                     <img src="Images/IAM_perm_exp.png" alt="IAM User Permissions Expanded" class="resource-image">
                     <p><i>JSON code of IAM Policy:</i></p>
                     <img src="Images/IAM_JSON.png" alt="IAM User JSON Policy" class="resource-image">
