@@ -92,11 +92,11 @@
         <h1>Technical Projects</h1>
         <div class="project-grid" onclick="toggleProject('s3-details')">
             <div class="project-header">
+                <span class="project-title">Static Website Hosting</span>
                 <img src="Images/HTML_logo.png" alt="HTML Logo" class="project-logo">
                 <img src="Images/css_logo.png" alt="CSS Logo" class="project-logo">
                 <img src="Images/Github_logo.png" alt="GitHub Logo" class="project-logo">
                 <img src="Images/AWS_logo.png" alt="AWS Logo" class="project-logo">
-                <span class="project-title">Static Website Hosting</span>
                 <span class="expand-icon">+</span>
             </div>
 
@@ -154,7 +154,8 @@
 
                     <li><strong>Git CLI:</strong> Implemented Git to manage the project lifecycle, utilizing a
                         local-to-remote workflow to track changes in HTML, CSS, and associated files.</li>
-                    <p class="descriptions">Repository Organization: Structure of the GitHub repository is organized in a way that allows for easy navigation and management of project files.</p>
+                    <p class="descriptions">Repository Organization: Structure of the GitHub repository is organized in
+                        a way that allows for easy navigation and management of project files.</p>
                     <img src="Images/Git.png" alt="GitHub Repository Structure" class="resource-image">
 
                     <li><strong>AWS IAM:</strong> Created IAM user "github-resume-deployer" with appropriate permissions
@@ -174,7 +175,99 @@
                     <p>The following image displays an expanded view of the policy permissions. Here, the user has full
                         access to S3 and S3 Object Lambda operations.</p>
                     <img src="Images/IAM_perm_exp.png" alt="IAM User Permissions Expanded" class="resource-image">
-                    <p class="descriptions" alt="IAM User JSON Policy Description">The JSON policy document defines the permissions
+                    <p class="descriptions" alt="IAM User JSON Policy Description">The JSON policy document defines the
+                        permissions
+                        granted to the IAM user "github-resume-deployer". It allows all actions ("s3:*") on all S3
+                        resources ("arn:aws:s3:::*"), effectively granting full access to S3 services.</p>
+                    <img src="Images/IAM_JSON.png" alt="IAM User JSON Policy" class="resource-image">
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="project-grid" onclick="toggleProject('excel-details')">
+            <div class="project-header">
+                <span class="project-title">Fleet Maintenance Analysis</span>
+                <img src="Images/excel_logo.png" alt="Excel Logo" class="project-logo">
+                <span class="expand-icon">+</span>
+            </div>
+
+            <div id="excel-details" class="project-details" style="display:none;">
+                <hr>
+                <p><strong>Purpose:</strong> Demonstrate advanced use of Excel functions, formulas and tools. Showcased
+                    skills in data analysis, pivot tables, automation, and visualization. The goal was to answer
+                    questions related to data interpretation and analysis of varied criteria.</p>
+                <ul class="details-list">
+                    <li><strong>Which truck manufacturer accrues the most maintenenace costs?</strong><i> Include
+                            averages</i>
+                    </li>
+                    <img src="Images/static1.png" alt="Static Website Hosting AWS S3 Bucket" class="resource-image">
+                    <img src="Images/static2.png" alt="Blocked Access to Static Website" class="resource-image">
+                    <li><strong>Configured JSON Bucket Policy:</strong> Set up a bucket policy to allow public read
+                        access to static website content. This is necessary to make the website publicly accessible.
+                    </li>
+                    <img src="Images/static3.png" alt="JSON Bucket Policy" class="resource-image">
+                    <li><strong>GitHub Actions:</strong> Developed a YAML workflow to automate deployments to an AWS S3
+                        bucket on every git
+                        push to the main branch.</li>
+                    <img src="Images/S3_JSON.png" alt="GitHub Actions Workflow for S3 Deployment"
+                        class="resource-image">
+                    <p><strong>Workflow Trigger & Setup:</strong> The workflow is named, "Deploy Resume to S3" and when
+                        a push event occurs onto the main branch, it runs on an Ubuntu-latest runner.
+                        This runner provides a fresh Linux environment in order to execute the deployment process.</p>
+
+                    <p><strong>Code Checkout:</strong> The first step in the workflow uses the "actions/checkout@v3"
+                        action to clone the latest repository code into the runner's workspace.
+                        This step ensures that the runner has access to the most up-to-date version of the code and
+                        project files are available for proceeding deployment steps.</p>
+
+                    <p><strong>AWS Authentication:</strong> The second step in the workflow uses the
+                        "aws-actions/configure-aws-credentials@v2" action to securely authenticate with AWS using
+                        secrets stored in my GitHub repository (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY).
+                        The region is set to us-west-1, the region in which my AWS resources are configured and API
+                        called are redirected to.</p>
+                    <img src="Images/Secrets.png" alt="GitHub Secrets for AWS Credentials" class="resource-image">
+                    <img src="Images/region.png" alt="AWS S3 Bucket Overview" class="resource-image">
+
+                    <p><strong>S3 Deployment:</strong> The final step of the workflow uses the AWS CLI's "aws s3 sync"
+                        command to synchronize the local project files with the S3 bucket named
+                        "angel-cloud-resume-2026".
+                        The "--delete" flag is included to remove any files in the S3 bucket that are no longer present
+                        in the local repository, ensuring removed repository files are also removed from the S3 bucket.
+                        This achieves accurate reflection of the current state of the project.
+                        The "--exclude" flag is used to exclude any hidden files (starting with a dot, .github* and
+                        .git*) from being uploaded to S3 bucket.</p>
+
+                    <p><strong>Security Considerations:</strong> We must never store sensitive credentials in
+                        version-controlled repositories or expose them in public code.
+                        Instead, these keys are stored in GitHub's encrypted secrets manager which also happens to be
+                        where this workflow retrieves them.</p>
+
+                    <li><strong>Git CLI:</strong> Implemented Git to manage the project lifecycle, utilizing a
+                        local-to-remote workflow to track changes in HTML, CSS, and associated files.</li>
+                    <p class="descriptions">Repository Organization: Structure of the GitHub repository is organized in
+                        a way that allows for easy navigation and management of project files.</p>
+                    <img src="Images/Git.png" alt="GitHub Repository Structure" class="resource-image">
+
+                    <li><strong>AWS IAM:</strong> Created IAM user "github-resume-deployer" with appropriate permissions
+                        following the Principle of Least Privilege. The user is restricted from having console access
+                        and is allowed only programmatic-only permissions for S3.</li>
+                    <img src="Images/IAM1.png" alt="IAM User Policies" class="resource-image">
+                    <p>Above is the brief summary of user "github-resume-deployer". The summary lists the Amazon
+                        Resource Name (ARN) of the IAM user. It also displays console access as "Disabled", as this user
+                        is only intended for programmatic access via GitHub Actions. This user is also assigned an
+                        access key.</p>
+
+                    <p>Below, we can see the policy name, "AmazonS3FullAccess". These policies are explicitly attached
+                        to this user, hence the attached via "Directly" section. Note
+                        this user has AmazonS3FullAccess permissions.</p>
+                    <img src="Images/IAM_perm.png" alt="IAM User Permissions" class="resource-image">
+
+                    <p>The following image displays an expanded view of the policy permissions. Here, the user has full
+                        access to S3 and S3 Object Lambda operations.</p>
+                    <img src="Images/IAM_perm_exp.png" alt="IAM User Permissions Expanded" class="resource-image">
+                    <p class="descriptions" alt="IAM User JSON Policy Description">The JSON policy document defines the
+                        permissions
                         granted to the IAM user "github-resume-deployer". It allows all actions ("s3:*") on all S3
                         resources ("arn:aws:s3:::*"), effectively granting full access to S3 services.</p>
                     <img src="Images/IAM_JSON.png" alt="IAM User JSON Policy" class="resource-image">
