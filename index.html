@@ -187,7 +187,7 @@
 
         <div class="project-grid" onclick="toggleProject('excel-details')">
             <div class="project-header">
-                <span class="project-title">Fleet Maintenance Analysis</span>
+                <span class="project-title">Fleet Analysis</span>
                 <img src="Images/excel_logo.png" alt="Excel Logo" class="project-logo">
                 <span class="expand-icon">+</span>
             </div>
@@ -198,79 +198,58 @@
                     skills in data analysis, pivot tables, automation, and visualization. The goal was to answer
                     questions related to data interpretation and analysis of varied criteria.</p>
                 <ul class="details-list">
-                    <li><strong>Which truck manufacturer accrues the most maintenenace costs?</strong><i> Include
-                            averages</i>
+                    <li><strong>Which truck manufacturer accrues the most maintenenace costs?</strong>
+                        <a href="data/Logistics_Analysis.xlsx" class="download-button">
+                            Download Full Analysis
+                        </a>
                     </li>
-                    <img src="Images/static1.png" alt="Static Website Hosting AWS S3 Bucket" class="resource-image">
-                    <img src="Images/static2.png" alt="Blocked Access to Static Website" class="resource-image">
-                    <li><strong>Configured JSON Bucket Policy:</strong> Set up a bucket policy to allow public read
-                        access to static website content. This is necessary to make the website publicly accessible.
-                    </li>
-                    <img src="Images/static3.png" alt="JSON Bucket Policy" class="resource-image">
-                    <li><strong>GitHub Actions:</strong> Developed a YAML workflow to automate deployments to an AWS S3
-                        bucket on every git
-                        push to the main branch.</li>
-                    <img src="Images/S3_JSON.png" alt="GitHub Actions Workflow for S3 Deployment"
+                    <img src="Images/LA1.png" alt="Screenshot of excel pivot tables" class="resource-image">
+                    <img src="Images/LA1_expanded.png" alt="Screenshot of VLOOKUP formula for cell M2"
                         class="resource-image">
-                    <p><strong>Workflow Trigger & Setup:</strong> The workflow is named, "Deploy Resume to S3" and when
-                        a push event occurs onto the main branch, it runs on an Ubuntu-latest runner.
-                        This runner provides a fresh Linux environment in order to execute the deployment process.</p>
+                    <p><strong>VLOOKUP Function:</strong> In order to answer the question, VLOOKUP was used to match
+                        truck IDs in the maintenance_records worksheet with the corresponding manufacturer information
+                        in the trucks worksheet. This allows for the creation of pivot tables that display maintenance
+                        costs by manufacturer.</p>
 
-                    <p><strong>Code Checkout:</strong> The first step in the workflow uses the "actions/checkout@v3"
-                        action to clone the latest repository code into the runner's workspace.
-                        This step ensures that the runner has access to the most up-to-date version of the code and
-                        project files are available for proceeding deployment steps.</p>
-
-                    <p><strong>AWS Authentication:</strong> The second step in the workflow uses the
-                        "aws-actions/configure-aws-credentials@v2" action to securely authenticate with AWS using
-                        secrets stored in my GitHub repository (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY).
-                        The region is set to us-west-1, the region in which my AWS resources are configured and API
-                        called are redirected to.</p>
-                    <img src="Images/Secrets.png" alt="GitHub Secrets for AWS Credentials" class="resource-image">
-                    <img src="Images/region.png" alt="AWS S3 Bucket Overview" class="resource-image">
-
-                    <p><strong>S3 Deployment:</strong> The final step of the workflow uses the AWS CLI's "aws s3 sync"
-                        command to synchronize the local project files with the S3 bucket named
-                        "angel-cloud-resume-2026".
-                        The "--delete" flag is included to remove any files in the S3 bucket that are no longer present
-                        in the local repository, ensuring removed repository files are also removed from the S3 bucket.
-                        This achieves accurate reflection of the current state of the project.
-                        The "--exclude" flag is used to exclude any hidden files (starting with a dot, .github* and
-                        .git*) from being uploaded to S3 bucket.</p>
-
-                    <p><strong>Security Considerations:</strong> We must never store sensitive credentials in
-                        version-controlled repositories or expose them in public code.
-                        Instead, these keys are stored in GitHub's encrypted secrets manager which also happens to be
-                        where this workflow retrieves them.</p>
-
-                    <li><strong>Git CLI:</strong> Implemented Git to manage the project lifecycle, utilizing a
-                        local-to-remote workflow to track changes in HTML, CSS, and associated files.</li>
-                    <p class="descriptions">Repository Organization: Structure of the GitHub repository is organized in
-                        a way that allows for easy navigation and management of project files.</p>
-                    <img src="Images/Git.png" alt="GitHub Repository Structure" class="resource-image">
-
-                    <li><strong>AWS IAM:</strong> Created IAM user "github-resume-deployer" with appropriate permissions
-                        following the Principle of Least Privilege. The user is restricted from having console access
-                        and is allowed only programmatic-only permissions for S3.</li>
-                    <img src="Images/IAM1.png" alt="IAM User Policies" class="resource-image">
-                    <p>Above is the brief summary of user "github-resume-deployer". The summary lists the Amazon
-                        Resource Name (ARN) of the IAM user. It also displays console access as "Disabled", as this user
-                        is only intended for programmatic access via GitHub Actions. This user is also assigned an
-                        access key.</p>
-
-                    <p>Below, we can see the policy name, "AmazonS3FullAccess". These policies are explicitly attached
-                        to this user, hence the attached via "Directly" section. Note
-                        this user has AmazonS3FullAccess permissions.</p>
-                    <img src="Images/IAM_perm.png" alt="IAM User Permissions" class="resource-image">
-
-                    <p>The following image displays an expanded view of the policy permissions. Here, the user has full
-                        access to S3 and S3 Object Lambda operations.</p>
-                    <img src="Images/IAM_perm_exp.png" alt="IAM User Permissions Expanded" class="resource-image">
-                    <p class="descriptions" alt="IAM User JSON Policy Description">The JSON policy document defines the
-                        permissions
-                        granted to the IAM user "github-resume-deployer". It allows all actions ("s3:*") on all S3
-                        resources ("arn:aws:s3:::*"), effectively granting full access to S3 services.</p>
-                    <img src="Images/IAM_JSON.png" alt="IAM User JSON Policy" class="resource-image">
+                    <p><strong>Pivot Tables:</strong> Pivot tables were created to summarize and analyze the maintenance
+                        costs by manufacturer. The pivot table allowed for easy comparison of maintenance expenses
+                        across different truck manufacturers.</p>
+                    <p><strong>Slicers:</strong> Slicers were added to the pivot table to allow filtering of data by
+                        different criteria. This provides for a more in depth
+                        analysis of the data.</p>
+                    <img src="Images/LA2.png" alt="Screenshot of excel pivot tables with slicers"
+                        class="resource-image">
+                    <p><i>The image above displays further analysis. It uses the slicers to filter the pivot table data
+                            by maintenance_type and facility_location. Here, data displayed is that of costs accrued by
+                            engine maintenance in Atlanta, Georgia.</i></p>
+                    <li><strong>Realized Profits:</strong> In this worksheet, we use a multitude of functions to
+                        summarize total accrued costs of each manufacturer and subtract them from the total revenue to
+                        calculate realized profits.</li>
+                    <img src="Images/realized_profits.png" alt="Overview of the realized_profits worksheet"
+                        class="resource-image">
+                    <p><strong>Unique:</strong> Use of the UNIQUE function to extract distinct values from a list of
+                        manufacturers.</p>
+                    <img src="Images/UNIQUE.png"
+                        alt="Screenshot of UNIQUE function used to extract distinct manufacturers"
+                        class="resource-image">
+                    <p><strong>COUNTIF:</strong> Use of the COUNTIF function to calculate total number of trucks for
+                        each manufacturer.</p>
+                    <img src="Images/COUNTIF.png"
+                        alt="Screenshot of COUNTIF function used to count total number of trucks for each manufacturer"
+                        class="resource-image">
+                    <p><strong>GETPIVOTDATA:</strong> Use of the GETPIVOTDATA function to extract specific data from a
+                        pivot table. In this case, it is the total maintenance cost of each manufacturer.</p>
+                    <img src="Images/GETPIVOTDATA.png"
+                        alt="Screenshot of GETPIVOTDATA function used to extract total maintenance costs for each manufacturer"
+                        class="resource-image">
+                    <p><strong>Equation for Realized Profits:</strong> The realized profits for each manufacturer
+                        are calculated by dividing realized profits by total revenue of each manufacturer.</p>
+                    <img src="Images/Simple.png"
+                        alt="Screenshot of equation used to calculate realized profits for each manufacturer"
+                        class="resource-image">
+                    <p><i>Note this column also has conditional formatting applied. Green fill is applied to
+                            manifactures with an above average profit margin. Underperforming manufacturers are
+                            highlighted in red fill.</i></p>
                 </ul>
             </div>
         </div>
