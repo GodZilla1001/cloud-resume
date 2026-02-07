@@ -253,6 +253,72 @@
                 </ul>
             </div>
         </div>
+
+        <div class="project-grid" onclick="toggleProject('athena-details')">
+            <div class="project-header">
+                <span class="project-title">Serverless E-Commerce Data Lakehouse</span>
+                <img src="Images/AWS_logo.png" alt="AWS Logo" class="project-logo">
+                <span class="expand-icon">+</span>
+            </div>
+
+            <div id="athena-details" class="project-details" style="display:none;">
+                <hr>
+                <p><strong>Purpose:</strong> Engineer a scalable pipeline in order to transform e-commerce raw
+                    data into business insights using AWS services.</p>
+                <ul class="details-list">
+                    <li><strong>Architecture:</strong> Designed a multi-tier S3 lake using Hive-style partioning. With
+                        this partioning style, we can optimize query performance and storage costs by minimizing the
+                        amount of data scanned during queries.</li>
+                    <img src="Images/datalake_objects.png" alt="AWS S3 Lakehouse Architecture" class="resource-image">
+                    <img src="Images/datalake_expanded.png" alt="AWS S3 Lakehouse Architecture Expanded"
+                        class="resource-image">
+                    <p><i>Note: The architecture is designed to be scalable and cost-effective. Instead of having to
+                            scan through one file with multiple partitions, we can scan only the relevant partitions for
+                            each query. Note the second image displays an expanded view of one of the partition
+                            ("customers/olist_customers_dataset.csv")s.</i></p>
+                    <li><strong>Data Orchestration:</strong> Created and deployed an AWS Glue Crawler to connect to the
+                        S3 data lake and generate metadata tables for querying in AWS Athena.</li>
+                    <img src="Images/crawler.png" alt="AWS Glue Crawler Configuration" class="resource-image">
+                    <img src="Images/crawler_data_source.png" alt="AWS Glue Crawler Data Source Configuration"
+                        class="resource-image">
+                    <p><i> The data source of the crawler refers back to the newly created S3 bucket
+                            "s3://angels-data-lake-project-2026" used as the "data lake". It sotres each of the .csv
+                            files.</i></p>
+                    <img src="Images/crawler_properties.png" alt="AWS Glue Crawler Properties Configuration"
+                        class="resource-image">
+                    <p><i>In the properties configuration above, we specify the crawler to use an existing IAM role with
+                            the necessary permissions to access the S3 bucket and create metadata tables. We also
+                            specify the crawler to update the "olist_db" database in AWS Glue Data Catalog with the
+                            generated metadata tables.</i></p>
+                    <p><strong>IAM Role:</strong> Specific permissions have been applied to the IAM role used by the
+                        crawler. The allowed permission policies include AWSS3ReadOnlyAccess and AWSGlueServiceRole. An
+                        expanded view of the IAM role permissions is shown in the image below.</p>
+                    <img src="Images/IAM_role_permission_policies.png" alt="IAM Role Permission Policies"
+                        class="resource-image">
+                    <img src="Images/IAM_role_ReadOnly.png" alt="IAM Role Read Only Access to S3"
+                        class="resource-image">
+                    <p><i>The <b>"AWSReadOnlyAccess"</b> policy grants read-only access to S3 buckets and objects. This is
+                            absolutely necessary for the crawler to be able to read the data in the S3 bucket and create
+                            metadata tables to fill AWS Glue Data Catalog.</i></p>
+                    <img src="Images/IAM_role_GlueServiceRole.png" alt="IAM Role AWS Glue Service Role Permissions"
+                        class="resource-image">
+                    <p><i>The <b>"AWSGlueServiceRole"</b> policy grants permissions for the crawler to create and manage
+                            metadata tables in AWS Glue Data Catalog. Everything from updating table definitions to
+                            creating new tables is allowed. This is necessary for the crawler to be able to
+                            create metadata tables based on the data in the S3 bucket and insert them into the
+                            "olist_db"
+                            database in AWS Glue Data Catalog.</i></p>
+                    <p>In the following image, we see when running this crawler, the creation of 9 tables. These
+                        tables represent automated creation of metadata for each of the .csv files in the data lake.</i>
+                    </p>
+                    <img src="Images/crawler_log_events.png" alt="AWS Glue Crawler Log Events" class="resource-image">
+                    <p>After the crawler finishes running, we can query the metadata tables in AWS Athena. Thanks to the
+                        Crawler, metadata tables have been created and insterted into "olist_db".</p>
+                    <img src="Images/olist_db.png" alt="AWS Athena Database with Crawler Generated Metadata Tables"
+                        class="resource-image">
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script>
