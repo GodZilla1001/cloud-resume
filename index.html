@@ -16,22 +16,20 @@
 
     <div id="resume-section" style="display:none;">
         <h1>Angel Lozada Servin</h1>
-        <p><strong>IT-focused Fulfillment Associate</strong> IT-focused Fulfillment Associate with 4+ years of
-            experience in
-            high-volume technical problem-solving and inventory logistics.
-            Excel-certified with hands-on skills in SQL, cloud technologies (AWS/Azure).
-            Actively transitioning into IT roles where analytical thinking, problem-solving, and technical skills drive
-            business impact.</p>
+        <p><strong>IT-focused Fulfillment Associate</strong> with 4+ years of
+            experience in Middle-Mile operations, high-volume technical problem-solving, and inventory data integrity.
+            Excel-certified with hands-on skills in SQL, cloud technologies (AWS/Azure). Actively transitioning into IT
+            roles where analytical thinking, problem-solving, and technical skills drive business impact.</p>
         <div class="container">
             <div class="left-column">
 
                 <h2>WORK EXPERIENCE</h2>
                 <p><strong>Amazon, 800 N 75th Ave, PHX7, Phoenix, AZ, 85043 - <i>Fulfillment Associate & Technical
-                            Problem Solver</i></strong>Sep 2021 – PRESENT</p>
+                            Problem Solver</i></strong> <br>Sep 2021 – PRESENT</p>
                 <ul class="responsibilities">
-                    <li><strong>System Troubleshooting:</strong> Utilize Warehouse Management Systems (WMS) and handheld
-                        scanning hardware to identify and resolve inventory discrepancies, issues, and system-level
-                        bottlenecks.</li>
+                    <li><strong>System Troubleshooting:</strong> Utilize Warehouse Management Systems (WMS)/ Inventory
+                        Management Systems (IMS) and handheld scanning hardware to identify and resolve inventory
+                        discrepancies, issues, and system-level bottlenecks.</li>
                     <li><strong>Data Integrity:</strong> Maintain 100% inventory accuracy by performing root cause
                         analysis on mis-shipped items.</li>
                     <li><strong>Efficiency & Performance:</strong> Resolve high-priority technical and logical issues
@@ -61,22 +59,24 @@
             <div class="right-column">
                 <h2>CONTACT</h2>
                 <a href="mailto:anglozdaan@gmail.com">anglozdaan@gmail.com</a>
-
+                <br>
                 (480) 561-7963
-
+                <br>
                 Phoenix, AZ
-
+                <br>
                 <a href="https://www.linkedin.com/in/angel-lozada-646a5037b">LinkedIn Profile</a>
 
                 <h2>TECHNICAL SKILLS</h2>
                 <ul class="skills">
                     <li><strong>Programming:</strong> SQL, Java, JavaScript, Python, HTML, CSS, PHP</li>
-                    <li><strong>Tools:</strong> VS Code, MySQL Workbench, Microsoft Excel (pivot tables, charts,
+                    <li><strong>Tools:</strong> VS Code, Tableau, MySQL Workbench, Microsoft Excel (pivot tables,
+                        charts,
                         array formulas, VLOOKUP/XLOOKUP, data migration), Git, GitHub, CI/CD pipelines, Bash/Command
                         Line</li>
-                    <li><strong>Cloud services:</strong> AWS (IAM, S3, QuickSight), Azure (Power BI)</li>
-                    <li><strong>Data:</strong> Data entry, migration, analysis, cleansing, visualization, durability
-                        (versioning)</li>
+                    <li><strong>Cloud services:</strong> AWS (IAM, Athena, S3, Glue, Cloudwatch), Azure (Fundamentals)
+                    </li>
+                    <li><strong>Data:</strong> Data entry, migration, analysis, cleansing, visualization, Data storage,
+                        queries</li>
                 </ul>
                 <h2>EDUCATION</h2>
                 <p><strong>Estrella Mountain Community College</strong> - <i>AAS Information Technology</i></p>
@@ -174,7 +174,6 @@
 
                     <p>The following image displays an expanded view of the policy permissions. Here, the user has full
                         access to S3 and S3 Object Lambda operations.</p>
-                    <img src="Images/IAM_perm_exp.png" alt="IAM User Permissions Expanded" class="resource-image">
                     <p class="descriptions" alt="IAM User JSON Policy Description">The JSON policy document defines the
                         permissions
                         granted to the IAM user "github-resume-deployer". It allows all actions ("s3:*") on all S3
@@ -196,7 +195,7 @@
                 <hr>
                 <p><strong>Purpose:</strong> Demonstrate advanced use of Excel functions, formulas and tools. Showcased
                     skills in data analysis, pivot tables, automation, and visualization. The goal was to answer
-                    questions related to data interpretation and analysis of varied criteria.</p>
+                    a question related to data interpretation and analysis of varied criteria for insight.</p>
                 <ul class="details-list">
                     <li><strong>Which truck manufacturer accrues the most maintenenace costs?</strong>
                         <a href="data/Logistics_Analysis.xlsx" class="download-button">
@@ -276,6 +275,13 @@
                             scan through one file with multiple partitions, we can scan only the relevant partitions for
                             each query. Note the second image displays an expanded view of one of the partition
                             ("customers/olist_customers_dataset.csv")s.</i></p>
+                    <p><strong>Infastructure Management:</strong> In order to prevent the crawler from creating tables
+                        from the Athena query results into the olist_db, we must isolate the data lake from the Athena
+                        query results. This
+                        is done by ensuring that the dedicated S3 bucket used for storing the Athena query results is
+                        separate from the data lake bucket.</p>
+                    <img src="Images/query_structure.png" alt="AWS Athena Query Result Output Structure"
+                        class="resource-image">
                     <li><strong>Data Orchestration:</strong> Created and deployed an AWS Glue Crawler to connect to the
                         S3 data lake and generate metadata tables for querying in AWS Athena.</li>
                     <img src="Images/crawler.png" alt="AWS Glue Crawler Configuration" class="resource-image">
@@ -297,7 +303,8 @@
                         class="resource-image">
                     <img src="Images/IAM_role_ReadOnly.png" alt="IAM Role Read Only Access to S3"
                         class="resource-image">
-                    <p><i>The <b>"AWSReadOnlyAccess"</b> policy grants read-only access to S3 buckets and objects. This is
+                    <p><i>The <b>"AWSReadOnlyAccess"</b> policy grants read-only access to S3 buckets and objects. This
+                            is
                             absolutely necessary for the crawler to be able to read the data in the S3 bucket and create
                             metadata tables to fill AWS Glue Data Catalog.</i></p>
                     <img src="Images/IAM_role_GlueServiceRole.png" alt="IAM Role AWS Glue Service Role Permissions"
@@ -316,8 +323,113 @@
                         Crawler, metadata tables have been created and insterted into "olist_db".</p>
                     <img src="Images/olist_db.png" alt="AWS Athena Database with Crawler Generated Metadata Tables"
                         class="resource-image">
+                    <li><strong>AWS Athena:</strong> The metadata tables created by the crawler are available in AWS
+                        Athena for querying using SQL.</li>
+                    <p><strong>Task 1:</strong> Identify "VIP" customers. VIP customers are determined by the amount of
+                        orders placed and the total amount of said orders. Below is the Athena query that identifies VIP
+                        customers:</p>
+                    <img src="Images/Athena_SQL_query.png" alt="AWS Athena SQL Query to Identify VIP Customers"
+                        class="resource-image">
+                    <p><i>In this query, we join the "orders" table with the "customers" table using the "customer_id"
+                            column. We also join the "order_payments" table with the "orders" table using the "order_id"
+                            column. Notice how the Common Table Expression (CTE) is used to simplify the query and make
+                            it more readable. It also uses CAST to convert the payment value from a string to a numeric
+                            value for proper aggregation. The CTE query uses COUNT for counting the total amount of
+                            orders each unique_customer_id has placed and SUM for summing the payment amounts
+                            (payment_value) with alias "total_spent".</i></p>
+                    <p><strong>Result:</strong> The query returns a top 10 list of customers who are classified as VIP
+                        based on their total spending and number of orders.</i></p>
+                    <img src="Images/Athena_SQL_query_result.png" alt="AWS Athena SQL Query Result for VIP Customers"
+                        class="resource-image">
+                    <p><strong>Task 2:</strong> There has been a growing amount of customer complaints coming from Sao
+                        Paulo. Olist requests product names, order_ids, delivery dates, customer ids, and order reviews.
+                        Identify customers within the Sao Paulo region, include Order_IDs, delivery date, product
+                        category name, and the customer review.</p>
+                    <img src="Images/Athena_SQL_query2.png"
+                        alt="AWS Athena SQL Query to Identify Customer Complaints from Sao Paulo"
+                        class="resource-image">
+                    <p><i>In this query, we join multiple tables in the CTE and assign them aliases for clarity and
+                            readability. A noteable difference to the prior query is that we are now filtering for
+                            customers in the Sao Paulo region using the "customer_city" column. The query results in
+                            over 10,000 rows of data.</i></p>
+                    <img src="Images/Athena_SQL_query2_result.png"
+                        alt="AWS Athena SQL Query Result for Customer Complaints from Sao Paulo" class="resource-image">
+                    <p><i>Notice that the results include customer complaints from Sao Paulo, with their respective
+                            order IDs, delivery dates, product category names, and customer reviews. The query omits any
+                            rows where the customer review is null or empty. Without the omit option, the query returns
+                            more than 10,000 rows of data!</i></p>
+                    <p><strong>Task 3:</strong> Identify products with the highest average shipping cost. Include the
+                        english product name, average shipping cost, and total number of orders for each product.</p>
+                    <img src="Images/Athena_SQL_query3.png"
+                        alt="AWS Athena SQL Query to Identify Products with Highest Average Shipping Cost"
+                        class="resource-image">
+                    <p><strong>Result:</strong> The query returns a list of products with their average shipping costs
+                        and total number of orders. Duplicate product names are removed thanks to the GROUPED BY clause.
+                    </p>
+                    <img src="Images/Athena_SQL_query3_result.png"
+                        alt="AWS Athena SQL Query Result for Products with Highest Average Shipping Cost"
+                        class="resource-image">
+
                 </ul>
             </div>
+        </div>
+
+        <div class="project-grid" onclick="toggleProject('Tableau-details')">
+            <div class="project-header">
+                <span class="project-title">Logistics Safety & Cost Analysis</span>
+                <img src="Images/Tableau_logo.png" alt="Tableau Logo" class="project-logo">
+                <span class="expand-icon">+</span>
+            </div>
+        </div>
+
+        <div id="Tableau-details" class="project-details" style="display:none;">
+            <hr>
+            <p><strong>Purpose:</strong> To analyze the financial and operational impact of safety incidents across the
+                North American logistics network and identify high-risk drivers.
+            <ul class="details-list">
+                <li><strong>Tableau Connections:</strong> Established relationships between source data tables in
+                    Tableau.</li>
+                <img src="Images/Tableau_connections.png" alt="Tableau Data Connections" class="resource-image">
+                <li><strong>Cost Hotspots:</strong> Six facilities (FAC00005, FAC00010, and FAC00014, FAC00018,
+                    FAC00022, FAC00025) significantly
+                    exceed the network average for costs. These facilities account for a major share of the total
+                    liability.</li>
+                <img src="Images/Tableau_costs_by_FAC.png" alt="Tableau Dashboard of Costs by Facility"
+                    class="resource-image">
+                <p><i>Note the verticle black lines on the sheet. The outermost left line represents the constant cost,
+                        while the second line represents the average cost for each facility ($107,575).</i></p>
+                <img src="Images/SUM_formula.png"
+                    alt="Table SUM formula used to calculate total costs for each facility" class="resource-image">
+                <p><i>Formula used to calculate total costs for each facility in Tableau. ZN was used to handle null
+                        values in the SUM calculation.</i></p>
+                <li><strong>Preventable Cases:</strong> Approximately 40% of incidents are flagged as "Preventable,"
+                    indicating a significant opportunity for cost recovery through initiatives such as targeted driver
+                    training.</li>
+                <img src="Images/preventable_incidents.png" alt="Tableau Dashboard of Preventable Incidents"
+                    class="resource-image">
+                <p><i> Using the data from this simple dashboard, we can conclude that about 40% of incidents could have
+                        been avoided.</i></p>
+                <li><strong>Equipment Integrity:</strong> Specific truck IDs show recurring incident patterns,
+                    suggesting a potential correlation between vehicle maintenance/age and driver safety performance.
+                </li>
+                <img src="Images/Tableau_incidents_by_truck.png" alt="Tableau Dashboard of Incidents by Truck"
+                    class="resource-image">
+                <img src="Images/truck_incidents_expanded.png"
+                    alt="Tableau Dashboard of Incidents by Truck Expanded View" class="resource-image">
+                <p><i> This dashboard displays individual truck incident data for each truck ID. Each incident is shown
+                        as individual data points and counts if a truck has had reocccuring incidents. Trucks TRK00007
+                        and TRK000019 show the most incidents.</i></p>
+                <li><strong>Geographic Risk:</strong> The data shows that incidents are not evenly distributed across
+                    all regions. Some geographic areas have higher incident rates, indicating a need for targeted safety
+                    initiatives in those regions.</li>
+                <img src="Images/geographic_risk.png" alt="Tableau Dashboard of Geographic Risk" class="resource-image">
+                <p><i>The map shows the geographic distribution of incidents across different regions. The darker shaded
+                        red areas indicate higher incident rates, while a lighter green shaded area indicates lower
+                        incident rates.</i></p>
+                <li><strong>Summary:</strong> The analysis reveals key insights into incident patterns and cost drivers,
+                    providing actionable intelligence for improving safety and reducing liability.</li>
+                    <img src="Images/Tableau_dashboard.png" alt="Tableau Dashboard Summary" class="resource-image">
+            </ul>
         </div>
     </div>
 
